@@ -1,5 +1,4 @@
-<form class="form-horizontal" [formGroup]="employeeForm"
-      (ngSubmit)="onSubmit()">
+<form class="form-horizontal" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Create Employee</h3>
@@ -7,36 +6,66 @@
     <div class="panel-body">
 
       <!--Name Field validation process starts here-->
-        <div class="form-group"
-        [ngClass]="{'has-error': ((employeeForm.get('fullName').touched ||
-                                   employeeForm.get('fullName').dirty) &&
-                                   employeeForm.get('fullName').errors)}">
-    <label class="col-sm-2 control-label" for="fullName">Full Name</label>
-    <div class="col-sm-8">
-      <input id="fullName" type="text" class="form-control" formControlName="fullName">
-
-      <span class="help-block"
-            *ngIf="((employeeForm.get('fullName').touched ||
-                     employeeForm.get('fullName').dirty) &&
-                     employeeForm.get('fullName').errors)">
-        <span *ngIf="employeeForm.get('fullName').errors.required">
-          Full Name is required
-        </span>
-        <span *ngIf="employeeForm.get('fullName').errors.minlength ||
-                     employeeForm.get('fullName').errors.maxlength">
-            Full Name must be greater than 2 characters and less than 10 characters
-        </span>
-      </span>
-    </div>
-  </div>
-   <!--Name Field validation process ends here-->
-
-      <div class="form-group">
-        <label class="col-sm-2 control-label" for="email">Email</label>
+      <div class="form-group" [ngClass]="{'has-error': formErrors.fullName}">
+        <label class="col-sm-2 control-label" for="fullName">Full Name</label>
         <div class="col-sm-8">
-          <input id="email" type="text" class="form-control" formControlName="email">
+          <input id="fullName" type="text" class="form-control" formControlName="fullName"
+            (blur)="logValidationErrors()">
+          <span class="help-block" *ngIf="formErrors.fullName">
+            {{formErrors.fullName}}
+
+          </span>
+
+
         </div>
       </div>
+      <!-- full name ends here
+        radio button for phone/email starts here -->
+
+      <div class="form-group">
+        <label class="col-md-2 control-label">Contact Preference</label>
+        <div class="col-md-8">
+
+          <label class="radio-inline">
+            <input type="radio" value="email"  formControlName="contactPreference">Email
+          </label>
+          <label class="radio-inline">
+            <input type="radio" value="Phone" formControlName="contactPreference">Phone
+          </label>
+
+        </div>
+      </div>
+
+
+      <!--phone/email Field validation process ends here-->
+
+      <div class="form-group" [ngClass]="{'has-error': formErrors.email}">
+        <label class="col-sm-2 control-label" for="email">Email</label>
+        <div class="col-sm-8">
+          <input id="email" type="text" class="form-control" formControlName="email" (blur)="logValidationErrors()">
+          <span class="help-block" *ngIf="formErrors.email">
+            {{formErrors.email}}
+
+          </span>
+        </div>
+      </div>
+
+
+      <div class="form-group" [ngClass]="{'has-error': formErrors.phone}">
+        <label class="col-sm-2 control-label" for="phone">Phone
+
+        </label>
+        <div class="col-sm-8">
+          <input id="phone" type="text" class="form-control" formControlName="phone" (blur)="logValidationErrors()">
+          <span class="help-block" *ngIf="formErrors.phone">
+            {{formErrors.phone}}
+
+          </span>
+        </div>
+      </div>
+
+
+
       <div formGroupName="skills">
 
         <div class="form-group">
@@ -44,62 +73,63 @@
             Skill
           </label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="skillName"
-                placeholder="Name" formControlName="skillName">
+            <input type="text" class="form-control" id="skillName" placeholder="Name" formControlName="skillName">
           </div>
           <div class="col-sm-4">
-            <input type="text" placeholder="Experience in Years"
-                class="form-control" formControlName="experienceInYears">
+            <input type="text" placeholder="Experience in Years" class="form-control"
+              formControlName="experienceInYears">
           </div>
         </div>
-      
-        <div class="form-group">
+
+        <div class="form-group" [ngClass]="{'has-error': formErrors.Proficiency}" >
           <label class="col-md-2 control-label">Proficiency</label>
           <div class="col-md-8">
             <label class="radio-inline">
-              <input id="proficiency" type="radio" value="beginner"
-                     formControlName="proficiency">Beginner
+              <input id="proficiency" type="radio" value="beginner" formControlName="proficiency"
+                (blur)="logValidationErrors()">Beginner
             </label>
             <label class="radio-inline">
-              <input id="proficiency" type="radio" value="intermediate"
-                     formControlName="proficiency">Intermediate
+              <input id="proficiency" type="radio" value="intermediate" formControlName="proficiency"
+                (blur)="logValidationErrors()">Intermediate
             </label>
             <label class="radio-inline">
-              <input id="proficiency" type="radio" value="advanced"
-                     formControlName="proficiency">Advanced
+              <input id="proficiency" type="radio" value="advanced" formControlName="proficiency"
+                (blur)="logValidationErrors()">Advanced
             </label>
           </div>
         </div>
-      
+
       </div>
 
     </div>
     <div class="panel-footer">
       <div class="btn-toolbar">
-      <button class="btn btn-primary" type="submit">Save</button>
-      <button class="btn btn-primary" type="button" (click)="onLoadDataClick()">Load Data</button>
-    </div>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="button" (click)="onLoadDataClick()">Load Data</button>
+      </div>
     </div>
   </div>
 </form>
 
+
+<!-- table to show status of each field -->
 <table border="1">
-    <tr>
-      <th style="padding: 10px">FormGroup</th>
-      <th style="padding: 10px">FormControl (fullName)</th>
-    </tr>
-    <tr>
-      <td style="padding: 10px">
-        touched : {{ employeeForm.touched }}
-        <br/> dirty : {{ employeeForm.dirty }}
-        <br/> valid : {{ employeeForm.valid }}
-        <br/> Form Values : {{employeeForm.value | json}}
-      </td>
-      <td style="padding: 10px">
-        touched : {{ employeeForm.get('fullName').touched }}
-        <br/> dirty : {{ employeeForm.get('fullName').dirty }}
-        <br/> valid : {{ employeeForm.get('fullName').valid }}
-        <br/> FullName Value : {{employeeForm.get('fullName').value}}
-      </td>
-    </tr>
-  </table>
+  <tr>
+    <th style="padding: 10px">FormGroup</th>
+    <th style="padding: 10px">FormControl (fullName)</th>
+  </tr>
+  <tr>
+    <td style="padding: 10px">
+      touched : {{ employeeForm.touched }}
+      <br /> dirty : {{ employeeForm.dirty }}
+      <br /> valid : {{ employeeForm.valid }}
+      <br /> Form Values : {{employeeForm.value | json}}
+    </td>
+    <td style="padding: 10px">
+      touched : {{ employeeForm.get('fullName').touched }}
+      <br /> dirty : {{ employeeForm.get('fullName').dirty }}
+      <br /> valid : {{ employeeForm.get('fullName').valid }}
+      <br /> FullName Value : {{employeeForm.get('fullName').value}}
+    </td>
+  </tr>
+</table>
