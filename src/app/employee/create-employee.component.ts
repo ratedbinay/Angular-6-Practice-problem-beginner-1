@@ -59,20 +59,20 @@ formErrors = {
     });
   }
 
-  logKeyValuePairs(group:FormGroup):void{
+  logValidationErrors(group:FormGroup):void{
       Object.keys(group.controls).forEach((key:string)=>{
        const abstractControl = group.get(key);
        if(abstractControl instanceof FormGroup){
-         this.logKeyValuePairs(abstractControl);
+         this.logValidationErrors(abstractControl);
          
         }
         else{
-         abstractControl.disable();
+         abstractControl.markAsDirty();
         }
       });
     }
   onLoadDataClick(): void {
-  this.logKeyValuePairs(this.employeeForm);
+  this.logValidationErrors(this.employeeForm);
 
   }
   
