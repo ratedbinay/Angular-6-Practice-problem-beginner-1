@@ -65,7 +65,7 @@
               (blur)="logValidationErrors()">
             <span class="help-block" *ngIf="formErrors.confirmEmail ||formErrors.emailGroup">
               {{formErrors.confirmEmail ? formErrors.confirmEmail :formErrors.emailGroup}}
-              
+
 
             </span>
           </div>
@@ -92,46 +92,52 @@
 
 
 
-      <div formGroupName="skills">
+      <div class="well">
+        <div formArrayName="skills">
+          <div formGroupName="0">
+            <div class="form-group"[ngClass]="{'has-error': formErrors.Proficiency}">
+              <label class="col-sm-2 control-label" for="skillName" > 
+                Skill
+              </label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="skillName" placeholder="Name" formControlName="skillName" (blur)="logValidationErrors()">
+              </div>
+              <label class="col-sm-2 control-label" for="experienceInYears" > 
+                Experience In Years
+              </label>
+              <div class="col-sm-4">
+                <input type="text" placeholder="Experience in Years" class="form-control"
+                  formControlName="experienceInYears" (blur)="logValidationErrors()" >
+              </div>
+            </div>
 
-        <div class="form-group">
-          <label class="col-sm-2 control-label" for="skillName">
-            Skill
-          </label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control" id="skillName" placeholder="Name" formControlName="skillName">
+            <div class="form-group" [ngClass]="{'has-error': formErrors.Proficiency}">
+              <label class="col-md-2 control-label">Proficiency</label>
+              <div class="col-md-8">
+                <label class="radio-inline">
+                  <input id="proficiency" type="radio" value="beginner" formControlName="proficiency"
+                    (blur)="logValidationErrors()">Beginner
+                </label>
+                <label class="radio-inline">
+                  <input id="proficiency" type="radio" value="intermediate" formControlName="proficiency"
+                    (blur)="logValidationErrors()">Intermediate
+                </label>
+                <label class="radio-inline">
+                  <input id="proficiency" type="radio" value="advanced" formControlName="proficiency"
+                    (blur)="logValidationErrors()">Advanced
+                </label>
+              </div>
+            </div>
+
           </div>
-          <div class="col-sm-4">
-            <input type="text" placeholder="Experience in Years" class="form-control"
-              formControlName="experienceInYears">
+
+        </div>
+        <div class="panel-footer">
+          <div class="btn-toolbar">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <button class="btn btn-primary" type="button" (click)="onLoadDataClick()">Load Data</button>
           </div>
         </div>
-
-        <div class="form-group" [ngClass]="{'has-error': formErrors.Proficiency}">
-          <label class="col-md-2 control-label">Proficiency</label>
-          <div class="col-md-8">
-            <label class="radio-inline">
-              <input id="proficiency" type="radio" value="beginner" formControlName="proficiency"
-                (blur)="logValidationErrors()">Beginner
-            </label>
-            <label class="radio-inline">
-              <input id="proficiency" type="radio" value="intermediate" formControlName="proficiency"
-                (blur)="logValidationErrors()">Intermediate
-            </label>
-            <label class="radio-inline">
-              <input id="proficiency" type="radio" value="advanced" formControlName="proficiency"
-                (blur)="logValidationErrors()">Advanced
-            </label>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-    <div class="panel-footer">
-      <div class="btn-toolbar">
-        <button class="btn btn-primary" type="submit">Save</button>
-        <button class="btn btn-primary" type="button" (click)="onLoadDataClick()">Load Data</button>
       </div>
     </div>
   </div>

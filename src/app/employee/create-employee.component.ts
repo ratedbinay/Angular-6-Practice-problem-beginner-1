@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { CustomValidators } from '../shared/custom.validators';
+import { FormatWidth } from '@angular/common';
 
 @Component({
   selector: 'app-create-employee',
@@ -76,11 +77,9 @@ export class CreateEmployeeComponent implements OnInit {
       }, { validators: matchEmail }),
 
       phone: [''],
-      skills: this.fb.group({
-        skillName: ['', [Validators.required]],
-        experienceInYears: ['', [Validators.required]],
-        proficiency: ['', [Validators.required]]
-      }),
+      skills: this.fb.array([
+        this.addSkillFormGroup()
+      ])
     });
 
 
@@ -91,6 +90,15 @@ export class CreateEmployeeComponent implements OnInit {
     this.employeeForm.valueChanges.subscribe((data) => {
       this.logValidationErrors(this.employeeForm);
     });
+  }
+
+  addSkillFormGroup(): FormGroup {
+    return this.fb.group({
+      skillName: ['', [Validators.required]],
+      experienceInYears: ['', [Validators.required]],
+      proficiency: ['', [Validators.required]]
+    })
+
   }
 
   onContactPrefernceChange(selectedValue: string) {
@@ -133,6 +141,15 @@ export class CreateEmployeeComponent implements OnInit {
         this.logValidationErrors(abstractControl);
         // If the control is a FormControl
       }
+
+      if (abstractControl instanceof FormArray) {
+        for (const control of abstractControl.controls) {
+          if (control instanceof FormGroup) {
+            this.logValidationErrors(control);
+          }
+        }
+      }
+
     });
   }
   onLoadDataClick(): void {
