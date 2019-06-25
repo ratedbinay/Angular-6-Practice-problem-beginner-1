@@ -101,6 +101,7 @@
               </label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" id="skillName" placeholder="Name" formControlName="skillName" (blur)="logValidationErrors()">
+                {{formErrors.skillName}}
               </div>
               <label class="col-sm-2 control-label" for="experienceInYears" > 
                 Experience In Years
@@ -108,6 +109,7 @@
               <div class="col-sm-4">
                 <input type="text" placeholder="Experience in Years" class="form-control"
                   formControlName="experienceInYears" (blur)="logValidationErrors()" >
+                  {{formErrors.experienceInYears}}
               </div>
             </div>
 
