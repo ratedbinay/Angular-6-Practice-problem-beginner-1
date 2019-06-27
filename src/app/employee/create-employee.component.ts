@@ -38,30 +38,14 @@ export class CreateEmployeeComponent implements OnInit {
       'required': 'Phone is required.',
       
 
-    },
-    'skillName': {
-      'required': 'Skill Name is required.',
-    },
-    'experienceInYears': {
-      'required': 'Experience is required.',
-    },
-    'proficiency': {
-      'required': 'Proficiency is required.',
-    },
+    }
   };
 
   // This object will hold the messages to be displayed to the user
   // Notice, each key in this object has the same name as the
   // corresponding form control
   formErrors = {
-    'fullName': '',
-    'email': '',
-    'confirmEmail': '',
-    'emailGroup': '',
-    'phone': '',
-    'skillName': '',
-    'experienceInYears': '',
-    'proficiency': ''
+    
   };
 
 
@@ -139,17 +123,8 @@ export class CreateEmployeeComponent implements OnInit {
 
       if (abstractControl instanceof FormGroup) {
         this.logValidationErrors(abstractControl);
-        // If the control is a FormControl
+        
       }
-
-      if (abstractControl instanceof FormArray) {
-        for (const control of abstractControl.controls) {
-          if (control instanceof FormGroup) {
-            this.logValidationErrors(control);
-          }
-        }
-      }
-
     });
   }
   onLoadDataClick(): void {
