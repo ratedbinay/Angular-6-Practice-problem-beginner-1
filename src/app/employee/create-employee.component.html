@@ -93,23 +93,39 @@
 
 
       <div class="well">
-        <div formArrayName="skills">
-          <div formGroupName="0">
-            <div class="form-group"[ngClass]="{'has-error': formErrors.Proficiency}">
-              <label class="col-sm-2 control-label" for="skillName" > 
+          <div class="form-group">
+              <div class="col-md-offset-2 col-md-4">
+                <button type="button" class="btn btn-primary" (click)="addSkillButtonClick()">
+                  Add Skill
+                </button>
+              </div>
+            </div>
+
+        <div formArrayName="skills" *ngFor="let skill of employeeForm.get('skills').controls; let i = index">
+          <div formGroupName="i">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="skillName">
                 Skill
               </label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="skillName" placeholder="Name" formControlName="skillName" (blur)="logValidationErrors()">
-                {{formErrors.skillName}}
+              <div class="col-sm-4" [ngClass]="{'has-error': formErrors.skillName}">
+                <input type="text" class="form-control" id="skillName" placeholder="Name" formControlName="skillName"
+                  (blur)="logValidationErrors()">
+                <span class="help-block" *ngIf="formErrors.skillName">
+                  {{formErrors.skillName}}
+
+                </span>
+
               </div>
-              <label class="col-sm-2 control-label" for="experienceInYears" > 
+              <label class="col-sm-2 control-label" for="experienceInYears">
                 Experience In Years
               </label>
-              <div class="col-sm-4">
+              <div class="col-sm-4" [ngClass]="{'has-error': formErrors.experienceInYears}">
                 <input type="text" placeholder="Experience in Years" class="form-control"
-                  formControlName="experienceInYears" (blur)="logValidationErrors()" >
+                  formControlName="experienceInYears" (blur)="logValidationErrors()">
+                <span class="help-block" *ngIf="formErrors.experienceInYears">
                   {{formErrors.experienceInYears}}
+                </span>
+
               </div>
             </div>
 
@@ -130,20 +146,19 @@
                 </label>
               </div>
             </div>
-
           </div>
-
         </div>
-        <div class="panel-footer">
-          <div class="btn-toolbar">
-            <button class="btn btn-primary" type="submit">Save</button>
-            <button class="btn btn-primary" type="button" (click)="onLoadDataClick()">Load Data</button>
-          </div>
+      </div>
+      <div class="panel-footer">
+        <div class="btn-toolbar">
+          <button class="btn btn-primary" type="submit">Save</button>
+          <button class="btn btn-primary" type="button" (click)="onLoadDataClick()">Load Data</button>
         </div>
       </div>
     </div>
   </div>
-</form> 
+
+</form>
 
 
 <!-- table to show status of each field -->

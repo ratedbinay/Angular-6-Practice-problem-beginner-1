@@ -36,7 +36,7 @@ export class CreateEmployeeComponent implements OnInit {
     },
     'phone': {
       'required': 'Phone is required.',
-      //'emailDomain': 'Email Domain should be gmail.com.'
+      
 
     },
     'skillName': {
@@ -76,7 +76,7 @@ export class CreateEmployeeComponent implements OnInit {
         confirmEmail: ['', [Validators.required]]
       }, { validators: matchEmail }),
 
-      phone: [''],
+      phone: ['', Validators.required],
       skills: this.fb.array([
         this.addSkillFormGroup()
       ])
@@ -90,6 +90,10 @@ export class CreateEmployeeComponent implements OnInit {
     this.employeeForm.valueChanges.subscribe((data) => {
       this.logValidationErrors(this.employeeForm);
     });
+  }
+
+  addSkillButtonClick():void{
+ (<FormArray>this.employeeForm.get('skills')).push(this.addSkillFormGroup());
   }
 
   addSkillFormGroup(): FormGroup {
@@ -125,11 +129,7 @@ export class CreateEmployeeComponent implements OnInit {
         // Get all the validation messages of the form control
         // that has failed the validation
         const messages = this.validationMessages[key];
-        // Find which validation has failed. For example required,
-        // minlength or maxlength. Store that error message in the
-        // formErrors object. The UI will bind to this object to
-        // display the validation errors
-
+        
         for (const errorKey in abstractControl.errors) {
           if (errorKey) {
             this.formErrors[key] += messages[errorKey] + ' ';
