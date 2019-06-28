@@ -36,7 +36,7 @@ export class CreateEmployeeComponent implements OnInit {
     },
     'phone': {
       'required': 'Phone is required.',
-      
+
 
     }
   };
@@ -45,7 +45,7 @@ export class CreateEmployeeComponent implements OnInit {
   // Notice, each key in this object has the same name as the
   // corresponding form control
   formErrors = {
-    
+
   };
 
 
@@ -76,16 +76,16 @@ export class CreateEmployeeComponent implements OnInit {
     });
   }
 
-  addSkillButtonClick():void{
- (<FormArray>this.employeeForm.get('skills')).push(this.addSkillFormGroup());
+  addSkillButtonClick(): void {
+    (<FormArray>this.employeeForm.get('skills')).push(this.addSkillFormGroup());
   }
 
   addSkillFormGroup(): FormGroup {
     return this.fb.group({
-      skillName: ['', [Validators.required]],
-      experienceInYears: ['', [Validators.required]],
-      proficiency: ['', [Validators.required]]
-    })
+      skillName: ['', Validators.required],
+      experienceInYears: ['', Validators.required],
+      proficiency: ['', Validators.required]
+    });
 
   }
 
@@ -110,10 +110,8 @@ export class CreateEmployeeComponent implements OnInit {
       this.formErrors[key] = '';
 
       if (abstractControl && !abstractControl.valid && (abstractControl.touched || abstractControl.dirty)) {
-        // Get all the validation messages of the form control
-        // that has failed the validation
         const messages = this.validationMessages[key];
-        
+
         for (const errorKey in abstractControl.errors) {
           if (errorKey) {
             this.formErrors[key] += messages[errorKey] + ' ';
@@ -123,8 +121,8 @@ export class CreateEmployeeComponent implements OnInit {
 
       if (abstractControl instanceof FormGroup) {
         this.logValidationErrors(abstractControl);
-        
       }
+      
     });
   }
   onLoadDataClick(): void {

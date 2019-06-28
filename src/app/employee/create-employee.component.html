@@ -102,15 +102,16 @@
         </div>
 
         <div formArrayName="skills" *ngFor="let skill of employeeForm.get('skills').controls; let i = index">
-          <div formGroupName="i">
-            
+          
+          <div formGroupName="{{i}}">
+
             <div class="form-group" [ngClass]="{'has-error':skill.get('skillName').invalid &&
                                                              skill.get('skillName').touched}">
-              <label class="col-sm-2 control-label" [attr.for]="'skillName'+i">
+              <label class="col-sm-2 control-label" [attr.for]=" 'skillName'+i ">
                 Skill
               </label>
               <div class="col-sm-4">
-                <input type="text" class="form-control" [id]="'skillName'+i" formControlName="skillName"
+                <input type="text" class="form-control" [id]=" 'skillName'+i " formControlName="skillName"
                   placeholder="C#, Java, Angular etc...">
                 <span class="help-block" *ngIf="skill.get('skillName').errors?.required &&
                                                   skill.get('skillName').touched">
@@ -122,11 +123,11 @@
 
             <div class="form-group" [ngClass]="{'has-error': skill.get('experienceInYears').invalid && 
                                                               skill.get('experienceInYears').touched}">
-              <label class="col-sm-2 control-label" [attr.for]="'experienceInYears'+i">
+              <label class="col-sm-2 control-label"  attr.for="{{'experienceInYears'+i}}">
                 Experience In Years
               </label>
               <div class="col-sm-4">
-                <input type="text" placeholder="Experience in Years" class="form-control" [id]="'experienceInYears'+i"
+                <input type="text" placeholder="Experience in Years" class="form-control" id="{{'experienceInYears'+i}}"
                   formControlName="experienceInYears">
                 <span class="help-block" *ngIf="skill.get('experienceInYears').errors?.required && 
                                                  skill.get('experienceInYears').touched">
