@@ -95,15 +95,15 @@
       <div class="well">
         <div class="form-group">
           <div class="col-md-offset-2 col-md-4">
-            <button type="button" class="btn btn-primary" (click)="addSkillButtonClick()" 
-            [disabled] ="employeeForm.get('skills').invalid">
+            <button type="button" class="btn btn-primary" (click)="addSkillButtonClick()"
+              [disabled]="employeeForm.get('skills').invalid">
               Add Skill
             </button>
           </div>
         </div>
 
         <div formArrayName="skills" *ngFor="let skill of employeeForm.get('skills').controls; let i = index">
-          <hr *ngIf ="i>0">
+          <hr *ngIf="i>0">
           <div [formGroupName]="i">
 
             <div class="form-group" [ngClass]="{'has-error':skill.get('skillName').invalid &&
@@ -119,12 +119,19 @@
                   Skill Name is required
                 </span>
               </div>
+              <!--Delete button-->
+              <div class="col-md-6" *ngIf="employeeForm.get('skills').length>1">
+                <button type="button" class="btn btn-danger btn-sm pull-right" title="Delete Skill"
+                  (click)="removeSkillButtonClick(i)">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+              </div>
             </div>
 
 
             <div class="form-group" [ngClass]="{'has-error': skill.get('experienceInYears').invalid && 
                                                               skill.get('experienceInYears').touched}">
-              <label class="col-sm-2 control-label"  attr.for="{{'experienceInYears'+i}}">
+              <label class="col-sm-2 control-label" attr.for="{{'experienceInYears'+i}}">
                 Experience In Years
               </label>
               <div class="col-sm-4">
