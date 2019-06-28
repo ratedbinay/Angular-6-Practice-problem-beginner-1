@@ -95,15 +95,16 @@
       <div class="well">
         <div class="form-group">
           <div class="col-md-offset-2 col-md-4">
-            <button type="button" class="btn btn-primary" (click)="addSkillButtonClick()">
+            <button type="button" class="btn btn-primary" (click)="addSkillButtonClick()" 
+            [disabled] ="employeeForm.get('skills').invalid">
               Add Skill
             </button>
           </div>
         </div>
 
         <div formArrayName="skills" *ngFor="let skill of employeeForm.get('skills').controls; let i = index">
-          
-          <div formGroupName="{{i}}">
+          <hr *ngIf ="i>0">
+          <div [formGroupName]="i">
 
             <div class="form-group" [ngClass]="{'has-error':skill.get('skillName').invalid &&
                                                              skill.get('skillName').touched}">
