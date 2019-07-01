@@ -1,47 +1,42 @@
 {
-    "employees": [
+  "employees": [
+    {
+      "id": 1,
+      "fullName": "Mark5",
+      "contactPreference": "email",
+      "phone": "3242138971",
+      "skills": [
         {
-            "id": 1,
-            "fullName": "Mark",
-            "contactPreference": "email",
-            "email": "mark@email.com",
-            "phone": "5641238971",
-            "skills": [
-                {
-                    "skillName": "C#",
-                    "experienceInYears": 1,
-                    "proficiency": "beginner"
-                },
-                {
-                    "skillName": "Java",
-                    "experienceInYears": 2,
-                    "proficiency": "intermediate"
-                }
-            ]
+          "skillName": "Angular",
+          "experienceInYears": "4",
+          "proficiency": "intermediate"
+        }
+      ],
+      "email": "nepalhighlander98@gmail.com"
+    },
+    {
+      "id": 2,
+      "fullName": "John",
+      "contactPreference": "phone",
+      "email": "john@gmail.com",
+      "phone": "3242138971",
+      "skills": [
+        {
+          "skillName": "Angular",
+          "experienceInYears": 2,
+          "proficiency": "beginner"
         },
         {
-            "id": 2,
-            "fullName": "John",
-            "contactPreference": "phone",
-            "email": "john@email.com",
-            "phone": "3242138971",
-            "skills": [
-                {
-                    "skillName": "Angular",
-                    "experienceInYears": 2,
-                    "proficiency": "beginner"
-                },
-                {
-                    "skillName": "HTML",
-                    "experienceInYears": 2,
-                    "proficiency": "intermediate"
-                },
-                {
-                    "skillName": "LINQ",
-                    "experienceInYears": 3,
-                    "proficiency": "advanced"
-                }
-            ]
+          "skillName": "HTMLLL",
+          "experienceInYears": 2,
+          "proficiency": "advanced"
+        },
+        {
+          "skillName": "LINQ",
+          "experienceInYears": 3,
+          "proficiency": "advanced"
         }
-    ]
+      ]
+    }
+  ]
 }
