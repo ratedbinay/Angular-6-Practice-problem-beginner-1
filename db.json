@@ -37,6 +37,20 @@
           "proficiency": "advanced"
         }
       ]
+    },
+    {
+      "id": 3,
+      "fullName": "adsg",
+      "contactPreference": "email",
+      "email": "ag@gmail.com",
+      "phone": "2414241314",
+      "skills": [
+        {
+          "skillName": "w352",
+          "experienceInYears": "sdg",
+          "proficiency": "intermediate"
+        }
+      ]
     }
   ]
 }
