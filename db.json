@@ -2,8 +2,8 @@
   "employees": [
     {
       "id": 1,
-      "fullName": "Mark5",
-      "contactPreference": "email",
+      "fullName": "Mark",
+      "contactPreference": "Phone",
       "phone": "3242138971",
       "skills": [
         {
@@ -33,7 +33,7 @@
         },
         {
           "skillName": "LINQ",
-          "experienceInYears": 3,
+          "experienceInYears": "5",
           "proficiency": "advanced"
         }
       ]
