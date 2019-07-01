@@ -92,8 +92,8 @@ export class CreateEmployeeComponent implements OnInit {
   }
   getEmployee(id: number) {
     this.employeeServices.getEmployee(id).subscribe(
-    (employee: IEmployee) => this.editEmployee(employee),
-    (err: any) => console.log(err)
+      (employee: IEmployee) => this.editEmployee(employee),
+      (err: any) => console.log(err)
     );
   }
 
@@ -108,6 +108,19 @@ export class CreateEmployeeComponent implements OnInit {
       },
       phone: employee.phone
     });
+
+    this.employeeForm.setControl('skills', this.setExistingSkills(employee.skills));
+  }
+  setExistingSkills(skillSets: ISkill): FormArray {
+    const formArray = new FormArray([]);
+    skillSets.forEach(s => {
+      formArray.push(this.fb.group({
+        skillName: s.skillName,
+        experienceInYears: s.experienceInYears,
+        proficiency: s.proficiency
+      }));
+    });
+    return formArray;
   }
 
 
@@ -116,7 +129,10 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   removeSkillButtonClick(skillGroupIndex: number): void {
-    (<FormArray>this.employeeForm.get('skills')).removeAt(skillGroupIndex);
+    const skillsFormArray = <FormArray>this.employeeForm.get('skills');
+    skillsFormArray.removeAt(skillGroupIndex);
+    skillsFormArray.markAsDirty();
+    skillsFormArray.markAsTouched();
   }
 
   addSkillFormGroup(): FormGroup {
@@ -148,8 +164,8 @@ export class CreateEmployeeComponent implements OnInit {
       // Clear the existing validation errors
       this.formErrors[key] = '';
 
-      if (abstractControl && !abstractControl.valid && 
-        (abstractControl.touched || abstractControl.dirty || abstractControl.value!=='')) {
+      if (abstractControl && !abstractControl.valid &&
+        (abstractControl.touched || abstractControl.dirty || abstractControl.value !== '')) {
         const messages = this.validationMessages[key];
 
         for (const errorKey in abstractControl.errors) {
@@ -191,7 +207,7 @@ export class CreateEmployeeComponent implements OnInit {
 function matchEmail(group: AbstractControl): { [key: string]: any } | null {
   const emailControl = group.get('email');
   const confirmEmailControl = group.get('confirmEmail');
-  if (emailControl.value === confirmEmailControl.value || ( confirmEmailControl.pristine && confirmEmailControl.value==='')) {
+  if (emailControl.value === confirmEmailControl.value || (confirmEmailControl.pristine && confirmEmailControl.value === '')) {
     return null;
   }
   else {
