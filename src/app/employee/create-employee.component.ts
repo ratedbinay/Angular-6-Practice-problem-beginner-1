@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray, FormControl } from '@angular/forms';
 import { CustomValidators } from '../shared/custom.validators';
 import { FormatWidth } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ISkill } from './ISkill';
+import { IEmployee } from './IEmployee';
+import { EmployeeService } from './employee.service';
+
 
 @Component({
   selector: 'app-create-employee',
@@ -49,7 +54,9 @@ export class CreateEmployeeComponent implements OnInit {
   };
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private employeeServices: EmployeeService) { }
 
   ngOnInit() {
     this.employeeForm = this.fb.group({
@@ -74,7 +81,35 @@ export class CreateEmployeeComponent implements OnInit {
     this.employeeForm.valueChanges.subscribe((data) => {
       this.logValidationErrors(this.employeeForm);
     });
+
+
+    this.route.paramMap.subscribe(params => {
+      const empId = +params.get('id');
+      if (empId) {
+        this.getEmployee(empId);
+      }
+    });
   }
+  getEmployee(id: number) {
+    this.employeeServices.getEmployee(id).subscribe(
+    (employee: IEmployee) => this.editEmployee(employee),
+    (err: any) => console.log(err)
+    );
+  }
+
+
+  editEmployee(employee: IEmployee) {
+    this.employeeForm.patchValue({
+      fullName: employee.fullName,
+      contactPreference: employee.contactPreference,
+      emailGroup: {
+        email: employee.email,
+        confirmEmail: employee.email
+      },
+      phone: employee.phone
+    });
+  }
+
 
   addSkillButtonClick(): void {
     (<FormArray>this.employeeForm.get('skills')).push(this.addSkillFormGroup());
@@ -113,7 +148,8 @@ export class CreateEmployeeComponent implements OnInit {
       // Clear the existing validation errors
       this.formErrors[key] = '';
 
-      if (abstractControl && !abstractControl.valid && (abstractControl.touched || abstractControl.dirty)) {
+      if (abstractControl && !abstractControl.valid && 
+        (abstractControl.touched || abstractControl.dirty || abstractControl.value!=='')) {
         const messages = this.validationMessages[key];
 
         for (const errorKey in abstractControl.errors) {
@@ -155,7 +191,7 @@ export class CreateEmployeeComponent implements OnInit {
 function matchEmail(group: AbstractControl): { [key: string]: any } | null {
   const emailControl = group.get('email');
   const confirmEmailControl = group.get('confirmEmail');
-  if (emailControl.value === confirmEmailControl.value || confirmEmailControl.pristine) {
+  if (emailControl.value === confirmEmailControl.value || ( confirmEmailControl.pristine && confirmEmailControl.value==='')) {
     return null;
   }
   else {
