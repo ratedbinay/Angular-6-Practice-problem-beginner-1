@@ -70,6 +70,20 @@
           "proficiency": "beginner"
         }
       ]
+    },
+    {
+      "id": 5,
+      "fullName": "asdg",
+      "contactPreference": "email",
+      "email": "admin@gmail.com",
+      "phone": "325",
+      "skills": [
+        {
+          "skillName": "hello",
+          "experienceInYears": "4",
+          "proficiency": "advanced"
+        }
+      ]
     }
   ]
 }

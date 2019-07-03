@@ -8,10 +8,15 @@ import { ListEmployeesComponent } from './list-employee.component';
 
 // Define the routes
 const appRoutes: Routes = [
-  { path: 'list', component: ListEmployeesComponent },
-  { path: 'create', component: CreateEmployeeComponent },
-  { path: 'edit/:id', component: CreateEmployeeComponent },
-];
+    {
+      path: 'employees',
+      children: [
+        { path: '', component: ListEmployeesComponent },
+        { path: 'create', component: CreateEmployeeComponent },
+        { path: 'edit/:id', component: CreateEmployeeComponent },
+      ]
+    }
+  ];
 
 // In a feature module forChild() method must be used to register routes
 // Export RouterModule, so the it's directives like RouterLink, RouterOutlet
