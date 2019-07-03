@@ -6,8 +6,9 @@ import { PageNotFoundComponent } from './page-not-found.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },  
+  { path: 'employees', loadChildren: './employee/employee.module#EmployeeModule' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

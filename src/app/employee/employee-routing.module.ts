@@ -8,21 +8,17 @@ import { ListEmployeesComponent } from './list-employee.component';
 
 // Define the routes
 const appRoutes: Routes = [
-    {
-      path: 'employees',
-      children: [
-        { path: '', component: ListEmployeesComponent },
-        { path: 'create', component: CreateEmployeeComponent },
-        { path: 'edit/:id', component: CreateEmployeeComponent },
-      ]
-    }
-  ];
+    { path: '', component: ListEmployeesComponent },
+    { path: 'create', component: CreateEmployeeComponent },
+    { path: 'edit/:id', component: CreateEmployeeComponent },
+
+];
 
 // In a feature module forChild() method must be used to register routes
 // Export RouterModule, so the it's directives like RouterLink, RouterOutlet
 // are available to the EmployeeModule that imports this module
 @NgModule({
-  imports: [ RouterModule.forChild(appRoutes) ],
-  exports: [ RouterModule ]
+    imports: [RouterModule.forChild(appRoutes)],
+    exports: [RouterModule]
 })
 export class EmployeeRoutingModule { }
