@@ -51,6 +51,25 @@
           "proficiency": "intermediate"
         }
       ]
+    },
+    {
+      "id": 4,
+      "fullName": "test name",
+      "contactPreference": "email",
+      "email": "test@gmail.com",
+      "phone": "1827",
+      "skills": [
+        {
+          "skillName": "teststill",
+          "experienceInYears": "lol",
+          "proficiency": "beginner"
+        },
+        {
+          "skillName": "325",
+          "experienceInYears": "dst",
+          "proficiency": "beginner"
+        }
+      ]
     }
   ]
 }
