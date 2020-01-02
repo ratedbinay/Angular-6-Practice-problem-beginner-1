@@ -1,0 +1,89 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "fullName": "Mark1",
+      "contactPreference": "Phone",
+      "phone": "3242138971",
+      "skills": [
+        {
+          "skillName": "Angular",
+          "experienceInYears": "4",
+          "proficiency": "intermediate"
+        }
+      ],
+      "email": "nepalhighlander98@gmail.com"
+    },
+    {
+      "id": 2,
+      "fullName": "John",
+      "contactPreference": "phone",
+      "email": "john@gmail.com",
+      "phone": "3242138971",
+      "skills": [
+        {
+          "skillName": "Angular",
+          "experienceInYears": 2,
+          "proficiency": "beginner"
+        },
+        {
+          "skillName": "HTMLLL",
+          "experienceInYears": 2,
+          "proficiency": "advanced"
+        },
+        {
+          "skillName": "LINQ",
+          "experienceInYears": "5",
+          "proficiency": "advanced"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fullName": "adsg",
+      "contactPreference": "email",
+      "email": "ag@gmail.com",
+      "phone": "2414241314",
+      "skills": [
+        {
+          "skillName": "w352",
+          "experienceInYears": "sdg",
+          "proficiency": "intermediate"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "fullName": "test name",
+      "contactPreference": "email",
+      "email": "test@gmail.com",
+      "phone": "1827",
+      "skills": [
+        {
+          "skillName": "teststill",
+          "experienceInYears": "lol",
+          "proficiency": "beginner"
+        },
+        {
+          "skillName": "325",
+          "experienceInYears": "dst",
+          "proficiency": "beginner"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "fullName": "asdg",
+      "contactPreference": "email",
+      "email": "admin@gmail.com",
+      "phone": "325",
+      "skills": [
+        {
+          "skillName": "hello",
+          "experienceInYears": "4",
+          "proficiency": "advanced"
+        }
+      ]
+    }
+  ]
+}
